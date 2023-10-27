@@ -1,0 +1,48 @@
+import tkinter as tk
+from tkinter import ttk
+
+# Create a list to store shopping items
+shopping_items = []
+
+def add_item():
+    item = item_entry.get()
+    if item:
+        shopping_items.append(item)
+        item_entry.delete(0, 'end')
+        update_listbox()
+
+def remove_item():
+    selected_item = listbox.get(listbox.curselection())
+    if selected_item:
+        shopping_items.remove(selected_item[0])
+        update_listbox()
+
+def update_listbox():
+    listbox.delete(0, 'end')
+    for item in shopping_items:
+        listbox.insert('end', item)
+
+# Create the main window
+window = tk.Tk()
+window.title("Shopping Database")
+
+# Create an input field to add shopping items
+item_label = tk.Label(window, text="Enter Item:")
+item_label.pack()
+item_entry = tk.Entry(window)
+item_entry.pack()
+
+# Create a button to add items to the list
+add_button = tk.Button(window, text="Add Item", command=add_item)
+add_button.pack()
+
+# Create a listbox to display the shopping items
+listbox = tk.Listbox(window)
+listbox.pack()
+
+# Create a button to remove selected items
+remove_button = tk.Button(window, text="Remove Selected", command=remove_item)
+remove_button.pack()
+
+# Start the GUI main loop
+window.mainloop()
